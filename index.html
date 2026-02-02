@@ -1,0 +1,144 @@
+
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day ❤️</title>
+
+<link rel="icon" href="favicon.jpg">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('tandem_grey.png');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* preload obrazków */
+body::before {
+  content:
+    url('broken.png')
+    url('colors.png')
+    url('theCertificate.png');
+  display: none;
+}
+
+h1 {
+  color: #fff;
+  text-shadow: 0 0 10px #000;
+  margin-top: 20px;
+}
+
+#image {
+  width: 90%;
+  max-width: 780px;
+  aspect-ratio: 780 / 517;
+  margin: 30px auto;
+  background-size: cover;
+  background-position: center;
+  background-color: #fff;
+  box-shadow: 0 0 15px #000;
+  border-radius: 12px;
+}
+
+.tak #image { background-image: url('theCertificate.png'); }
+.nie #image { background-image: url('nie.gif'); }
+.moze #image { background-image: url('moze.gif'); }
+
+button {
+  padding: 16px 32px;
+  font-size: 20px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+button:hover {
+  background: #ff1e4d;
+}
+
+/* ❤️ SERDUSZKA */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: #ff4d6d;
+  font-size: 24px;
+  animation: fall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>💘 Mam do Ciebie pytanie 💘</h1>
+
+<div id="image"></div>
+
+<button onclick="beardedBoo()">Kliknij tutaj ❤️</button>
+
+<script>
+function beardedBoo() {
+  document.body.classList.remove("tak", "nie", "moze");
+
+  let answer = prompt("Zostaniesz moją walentynką? (tak / nie / moze)");
+  if (!answer) return;
+
+  answer = answer.toLowerCase();
+
+  if (answer === "tak") {
+    document.body.classList.add("tak");
+    startHearts();
+    alert("❤️ Certyfikat ❤️");
+  }
+  else if (answer === "moze") {
+    document.body.classList.add("moze");
+    alert("Zostawie to bez komentarza, że ty sie wogole zastanawiasz: :(");
+  }
+  else {
+    document.body.classList.add("nie");
+    setTimeout(() => {
+      alert("AHA");
+    }, 300);
+  }
+}
+
+/* ❤️ animowane serduszka */
+function startHearts() {
+  setInterval(createHeart, 300);
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (20 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+</script>
+
+</body>
+</html>
